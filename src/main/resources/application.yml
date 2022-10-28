@@ -1,0 +1,85 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 2000 #最大线程数
+    min-spare-threads: 30 #最小线程数
+    connection-timeout: 60 #连接超时 毫秒
+  port: 8080
+  servlet:
+    context-path: /yzg
+  max-http-header-size: 3145728 #请求头参数长度
+
+
+spring:
+  # 环境 dev|test|prod
+  profiles:
+    active: dev
+  # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+  #freemarker 模板
+  freemarker:
+    tempalte-loader-path:classpath: /templates
+    #关闭缓存，及时刷新，上线生产环境需要修改为true
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.custom.*.*.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+    #mybatis-plus配置控制台打印完整带参数SQL语句
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+log:
+  file:
+    name: custom
+    path: logs
+  error:
+    file:
+      name: custom-error
+
+
+##文件上传路径
+file:
+  uploadpath:
+    msg: E:\\file_path\\0913\\
+    say: E:\\file_path\\0913\\
+    mold: D:\\idea-workspace\\app-prosper-dm-web\\static\\img\\mold\\
+
+dd:
+  #企业id
+  corpId: ding571ba8ce341ec80b24f2f5cc6abecb85
+#  agentId: 15621011
+  #企业内部应用的AppKey
+  appKey: dingpwv5k18zktatz2ug
+  #企业内部应用的AppSecret
+  appSecret: WXOqV0dGUJom-Ut5oFvWNZKvYabwXZefU2q5PSbLxDutpcRNN2dVk50HM0cPpD3t

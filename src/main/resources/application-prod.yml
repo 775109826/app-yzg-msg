@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/custom?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      username: root
+      password: root
+      initial-size: 10
+      max-active: 50
+      min-idle: 10
+      max-wait: 60000
+      default-auto-commit: true
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 50
+      time-between-eviction-runs-millis: 300000
+      min-evictable-idle-time-millis: 1800000
+      #Oracle需要打开注释
+      #validation-query: SELECT 1 FROM DUAL
+      #下面这两个配置，可以在每次连接的时候判断一些连接是否有效
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+
+
+
+
+##多数据源的配置
+#dynamic:
+#  datasource:
+#    oabase:
+#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#      url: jdbc:sqlserver://172.16.0.48:1433;DatabaseName=A8V5
+#      username: OAadmin
+#      password: OAadmin_123
+#    cozybase:
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+#      url: jdbc:mysql://172.16.1.42:3306/cozy_sit?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+#      username: root
+#      password: qwerQWER1234!@#$
