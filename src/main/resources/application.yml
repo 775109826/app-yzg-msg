@@ -61,11 +61,11 @@ mybatis-plus:
 
 log:
   file:
-    name: custom
+    name: yzg
     path: logs
   error:
     file:
-      name: custom-error
+      name: yzg-error
 
 
 ##文件上传路径
@@ -73,7 +73,7 @@ file:
   uploadpath:
     msg: E:\\file_path\\0913\\
     say: E:\\file_path\\0913\\
-    mold: D:\\idea-workspace\\app-prosper-dm-web\\static\\img\\mold\\
+    mold: D:\\idea-workspace\\yzg\\static\\img\\mold\\
 
 dd:
   #企业id

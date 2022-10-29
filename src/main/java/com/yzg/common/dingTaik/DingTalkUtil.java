@@ -23,7 +23,7 @@ import java.util.List;
 
 
 /**
- * @description:描述
+ * @description:描述 钉钉机器人工具类
  * @author: 空想的闲暇时光  wall·e
  * @createDate: 2022/10/27 15:54
  **/
@@ -75,12 +75,37 @@ public class DingTalkUtil {
      */
     private static DingTalkClient client;
 
-    public DingTalkUtil(String accessToken) {
+    private DingTalkUtil() {
+    }
+
+    public static DingTalkUtil of() {
+        return new DingTalkUtil();
+    }
+
+    public static DingTalkUtil of(String accessToken) {
+        return new DingTalkUtil(accessToken);
+    }
+
+    /**
+     * 签名方式条用
+     * @param accessToken webhook 地址
+     * @param secret     签名
+     * @return
+     */
+    public static DingTalkUtil of(String accessToken, String secret) {
+        return new DingTalkUtil(accessToken, secret);
+    }
+
+    /**
+     * 仅地址
+     * @param accessToken webhook 地址
+     */
+    private DingTalkUtil(String accessToken) {
         this.accessToken = accessToken;
         client = new DefaultDingTalkClient(accessToken);
     }
 
-    public DingTalkUtil(String accessToken, String secret) {
+    private DingTalkUtil(String accessToken, String secret) {
         this.accessToken = accessToken;
         this.secret = secret;
         try {
