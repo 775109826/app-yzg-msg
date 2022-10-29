@@ -1,5 +1,5 @@
 
-package com.yzg.common.dingTaik;
+package com.yzg.common.dingTaik.util;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyun.credentials.utils.StringUtils;

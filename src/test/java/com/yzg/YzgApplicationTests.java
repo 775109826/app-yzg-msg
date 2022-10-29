@@ -1,18 +1,11 @@
 package com.yzg;
 
-import cn.hutool.core.date.DateUtil;
-import com.google.common.collect.Maps;
-import com.yzg.common.dingTaik.DingTalkUtil;
-import com.yzg.common.freemarketools.FreemarkeTools;
-import com.yzg.common.util.FileUtils;
+import com.yzg.common.dingTaik.config.RobotConfig;
+import com.yzg.common.dingTaik.util.DingTalkUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.ui.ModelMap;
-
-import java.util.Date;
-import java.util.Map;
 
 @Slf4j
 @SpringBootTest
@@ -23,15 +16,13 @@ class YzgApplicationTests {
     @Test
     void contextLoads() {
         try {
-            String imgPath = null;
-            String token = "https://oapi.dingtalk.com/robot/send?access_token=2d50109dedeae983f7f99be5a2029bf437a302181909282d6531e3d506f66134";
-            String secret = "SEC10af169fa90b888cdc15d6463b0820858b3084a1dadeb4bab9c626182c15ac79";
-            DingTalkUtil ding = DingTalkUtil.of(token, secret);
-            String markDownstr="#### 杭州天气 @156xxxx8827\n" +
+            DingTalkUtil ding = DingTalkUtil.of(RobotConfig.testRobot.getWebhook(), RobotConfig.testRobot.getSecret());
+            // markDown文本
+            String markDownstr = "#### 杭州天气 @156xxxx8827\n" +
                     "> 9度，西北风1级，空气良89，相对温度73%\n\n" +
-                    "> ![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n"  +
+                    "> ![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" +
                     "> ###### 10点20分发布 [天气](http://www.thinkpage.cn/) \n";
-            ding.sendMessageByMarkdown("asddas",markDownstr,null,false);
+            ding.sendMessageByMarkdown("我是标题", markDownstr, null, false);
           /*  ModelMap modelMap = new ModelMap();
             Map<String, Object> mainItem = Maps.newHashMap();
             mainItem.put("title", "reportName");
