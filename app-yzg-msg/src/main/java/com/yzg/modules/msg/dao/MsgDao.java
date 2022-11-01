@@ -1,4 +1,4 @@
-package com.yzg.modules.test.dao;
+package com.yzg.modules.msg.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,5 +11,5 @@ import java.util.Map;
  * @createDate: 2022/10/29 10:15
  **/
 @Mapper
-public interface TestDao extends BaseMapper<Map> {
+public interface MsgDao extends BaseMapper<Map> {
 }

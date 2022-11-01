@@ -1,8 +1,8 @@
-package com.yzg.modules.test.service.Impl;
+package com.yzg.modules.msg.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yzg.modules.test.dao.TestDao;
-import com.yzg.modules.test.service.TestService;
+import com.yzg.modules.msg.dao.MsgDao;
+import com.yzg.modules.msg.service.MsgService;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -13,6 +13,6 @@ import java.util.Map;
  * @createDate: 2022/10/29 10:15
  **/
 @Service("testService")
-public class TestServiceImpl extends ServiceImpl<TestDao, Map> implements TestService {
+public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgService {
 
 }

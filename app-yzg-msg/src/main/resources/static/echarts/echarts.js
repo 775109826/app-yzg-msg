@@ -8583,7 +8583,7 @@
       return subRange === 0 ? r0 : (r0 + r1) / 2;
     } // Avoid accuracy problem in edge, such as
     // 146.39 - 62.83 === 83.55999999999999.
-    // See echarts/test/ut/spec/util/number.js#linearMap#accuracyError
+    // See echarts/msg/ut/spec/util/number.js#linearMap#accuracyError
     // It is a little verbose for efficiency considering this method
     // is a hotspot.
 
@@ -8690,7 +8690,7 @@
     // (1) If the loop count is over about 20, it is slower than `getPrecisionSafe`.
     //     (see https://jsbench.me/2vkpcekkvw/1)
     // (2) If the val is less than for example 1e-15, the result may be incorrect.
-    //     (see test/ut/spec/util/number.test.ts `getPrecision_equal_random`)
+    //     (see msg/ut/spec/util/number.msg.ts `getPrecision_equal_random`)
 
 
     if (val > 1e-14) {
@@ -9088,7 +9088,7 @@
    *     0x12, '0x12', '-0x12', 012, '012', '-012',
    *     non-string, ...
    *
-   * @test See full test cases in `test/ut/spec/util/number.js`.
+   * @msg See full msg cases in `msg/ut/spec/util/number.js`.
    * @return Must be a typeof number. If not numeric, return NaN.
    */
 
@@ -20804,7 +20804,7 @@
     // It is recommended that `hoverLayerThreshold` is equivalent to or less than
     // `progressiveThreshold`, otherwise hover will cause restart of progressive,
     // which is unexpected.
-    // see example <echarts/test/heatmap-large.html>.
+    // see example <echarts/msg/heatmap-large.html>.
     hoverLayerThreshold: 3000,
     // See: module:echarts/scale/Time
     useUTC: false
@@ -23787,7 +23787,7 @@
     var startIndex; // PEDING: could data be null/undefined here?
     // currently, if `dataset.source` not specified, error thrown.
     // if `series.data` not specified, nothing rendered without error thrown.
-    // Should test these cases.
+    // Should msg these cases.
 
     if (!data) {
       return {
@@ -26164,7 +26164,7 @@
 
       var minDist = Infinity;
       var minDiff = -1;
-      var nearestIndicesLen = 0; // Check the test case of `test/ut/spec/data/SeriesData.js`.
+      var nearestIndicesLen = 0; // Check the msg case of `msg/ut/spec/data/SeriesData.js`.
 
       for (var i = 0, len = this.count(); i < len; i++) {
         var dataIndex = this.getRawIndex(i);
@@ -29537,7 +29537,7 @@
 
       var progressiveRender = pipeline.progressiveEnabled && view.incrementalPrepareRender && dataLen >= pipeline.threshold;
       var large = seriesModel.get('large') && dataLen >= seriesModel.get('largeThreshold'); // TODO: modDataCount should not updated if `appendData`, otherwise cause whole repaint.
-      // see `test/candlestick-large3.html`
+      // see `msg/candlestick-large3.html`
 
       var modDataCount = seriesModel.get('progressiveChunkMode') === 'mod' ? dataLen : null;
       seriesModel.pipelineContext = pipeline.context = {
@@ -39524,7 +39524,7 @@
 
   function isInLargeMode(seriesModel) {
     return seriesModel.pipelineContext && seriesModel.pipelineContext.large;
-  } // See cases in `test/bar-start.html` and `#7412`, `#8747`.
+  } // See cases in `msg/bar-start.html` and `#7412`, `#8747`.
 
 
   function getValueAxisStart(baseAxis, valueAxis) {
@@ -40645,7 +40645,7 @@
     //     Should not depend on series type `bar`?
     // (3) Fix that might overlap when using dataZoom.
     // (4) Consider other chart types using `barGrid`?
-    // See #6728, #4862, `test/bar-overflow-time-plot.html`
+    // See #6728, #4862, `msg/bar-overflow-time-plot.html`
 
     var ecModel = model.ecModel;
 
@@ -40938,7 +40938,7 @@
       // is [0.1, 0.5], the extent of the `stackResultDimension`
       // is [7, 9], the final extent should NOT include [0.1, 0.5],
       // because there is no graphic corresponding to [0.1, 0.5].
-      // See the case in `test/area-stack.html` `main1`, where area line
+      // See the case in `msg/area-stack.html` `main1`, where area line
       // stack needs `yAxis` not start from 0.
       dataDimMap[getStackedDimension(data, dataDim)] = true;
     });
@@ -46390,7 +46390,7 @@
     if (isCoordinateSystemType(coord, 'cartesian2d')) {
       var baseAxis = coord.getBaseAxis(); // When boundaryGap is false or using time axis. bar may exceed the grid.
       // We should not clip this part.
-      // See test/bar2.html
+      // See msg/bar2.html
 
       if (baseAxis.type !== 'category' || !baseAxis.onBand) {
         var expandWidth = data.getLayout('bandWidth');
@@ -49509,7 +49509,7 @@
 
       if (coordSys && coordSys.getArea && seriesModel.get('clip', true)) {
         clipShapeForSymbol = coordSys.getArea(); // Avoid float number rounding error for symbol on the edge of axis extent.
-        // See #7913 and `test/dataZoom-clip.html`.
+        // See #7913 and `msg/dataZoom-clip.html`.
 
         if (clipShapeForSymbol.width != null) {
           clipShapeForSymbol.x -= 0.1;

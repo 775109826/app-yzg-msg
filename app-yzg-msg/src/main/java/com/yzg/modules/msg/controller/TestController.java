@@ -1,4 +1,4 @@
-package com.yzg.modules.test.controller;
+package com.yzg.modules.msg.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +19,6 @@ public class TestController {
     @GetMapping("/list")
     public ModelAndView list(Map<String, Object> map) {
         map.put("name", "chenf24k");
-        return new ModelAndView("not-test", map);
+        return new ModelAndView("not-msg", map);
     }
 }

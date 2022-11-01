@@ -34,7 +34,7 @@ class YzgApplicationTests {
             mainItem.put("outDate", "最后结账日");
             mainItem.put("saleName", "店长");
             mainItem.put("areaName", "办事处");
-            String templateName = "not-test";
+            String templateName = "not-msg";
             String html = FreemarkeTools.getTemplate(modelMap, templateName);
             String path = filePath.concat(DateUtil.format(DateUtil.date(), "yyyyMMdd")).concat("/");
             FileUtils.mkdirsFilePath(path);

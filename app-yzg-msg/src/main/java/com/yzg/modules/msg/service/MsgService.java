@@ -1,4 +1,4 @@
-package com.yzg.modules.test.service;
+package com.yzg.modules.msg.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -9,5 +9,5 @@ import java.util.Map;
  * @author: 空想的闲暇时光  wall·e
  * @createDate: 2022/10/29 10:14
  **/
-public interface TestService extends IService<Map> {
+public interface MsgService extends IService<Map> {
 }

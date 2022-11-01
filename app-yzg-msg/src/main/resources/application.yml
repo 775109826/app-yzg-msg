@@ -11,7 +11,7 @@ server:
 
 
 spring:
-  # 环境 dev|test|prod
+  # 环境 dev|msg|prod
   profiles:
     active: dev
   # jackson时间格式化
