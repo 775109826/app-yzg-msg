@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Slf4j
 @SpringBootTest
 class YzgApplicationTests {
-    @Value("${file.uploadpath.msg}")
+    @Value("${file.uploadpath.image}")
     private String filePath;
 
     @Test

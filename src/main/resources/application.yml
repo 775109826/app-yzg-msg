@@ -68,12 +68,10 @@ log:
       name: yzg-error
 
 
-##文件上传路径
+##图片文件路径
 file:
   uploadpath:
-    msg: E:\\file_path\\0913\\
-    say: E:\\file_path\\0913\\
-    mold: D:\\idea-workspace\\yzg\\static\\img\\mold\\
+    image: E:\\file_path\\image\\
 
 dd:
   #企业id

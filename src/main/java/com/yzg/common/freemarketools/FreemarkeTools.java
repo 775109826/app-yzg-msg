@@ -2,14 +2,15 @@ package com.yzg.common.freemarketools;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.openhtmltopdf.swing.Java2DRenderer;
-import com.openhtmltopdf.util.FSImageWriter;
+import com.openhtmltopdf.java2d.api.BufferedImagePageProcessor;
+import com.openhtmltopdf.java2d.api.Java2DRendererBuilder;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Map;
@@ -118,18 +119,19 @@ public class FreemarkeTools {
         }
         FileOutputStream fout = null;
         try {
-            File f = new File(inputFileName);
-
-
-
-
-            Java2DRenderer renderer = new Java2DRenderer(f, widthImage, heightImage);
-            BufferedImage image = renderer.getImage();
-            FSImageWriter imageWriter = new FSImageWriter();
-            imageWriter.setWriteCompressionQuality(0.9f);
+            Java2DRendererBuilder builder = new Java2DRendererBuilder();
+            // 图片宽高
+            builder.useDefaultPageSize(widthImage, heightImage, Java2DRendererBuilder.PageSizeUnits.MM);
+            // 字体
+            builder.useEnvironmentFonts(true);
+            builder.withHtmlContent(html, "");
+            BufferedImagePageProcessor bufferedImagePageProcessor = new BufferedImagePageProcessor(
+                    BufferedImage.TYPE_INT_RGB, 2.0);
+            builder.toSinglePage(bufferedImagePageProcessor).runFirstPage();
+            BufferedImage image = bufferedImagePageProcessor.getPageImages().get(0);
             File imgFile = new File(outputFileName);
             fout = new FileOutputStream(imgFile);
-            imageWriter.write(image, fout);
+            ImageIO.write(image, "PNG", fout);
         } catch (Exception e) {
             logger.error("HTML文件转JDG发生失败，错误原因" + e.toString());
         } finally {
