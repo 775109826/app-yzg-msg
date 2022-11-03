@@ -113,5 +113,6 @@
         WHERE
         substring(t.cinvccode,1,2) = '21'
         AND t.iInvCGrade = '2'
+        order by t.cinvccode
     </select>
 </mapper>

@@ -10,17 +10,19 @@ public class DailyDelivery implements Serializable {
 
     private String cinvccode;
 
-    private String cinvcname;
+    private String cinvcname;  //品名
 
-    private String cinvstd;
+    private String cinvstd;    // 规格
 
-    private BigDecimal drfh;
+    private BigDecimal drfh;   // 当日发货
 
-    private BigDecimal ylfh;
+    private BigDecimal ylfh;   // 月已发数量
 
-    private BigDecimal drbh;
+    private BigDecimal drbh;   // 当日报货
 
-    private BigDecimal wf;
+    private BigDecimal wf;     // 未发数量
 
-    private BigDecimal kc;
+    private BigDecimal kc;     // 仓库库存
+
+    private String fhRatio;    // 发货占比
 }
