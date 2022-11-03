@@ -14,7 +14,7 @@ import java.util.Map;
  **/
 @RestController
 @RequestMapping("test")
-public class TestController {
+public class MsgController {
 
     @GetMapping("/list")
     public ModelAndView list(Map<String, Object> map) {

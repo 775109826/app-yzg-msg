@@ -3,9 +3,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/custom?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      url: jdbc:mysql://localhost:3306/yzg?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
       username: root
-      password: root
+      password: 1qaz2wsx
       initial-size: 10
       max-active: 50
       min-idle: 10
@@ -35,19 +35,11 @@ spring:
           config:
             multi-statement-allow: true
 
-
-
-
 ##多数据源的配置
-#dynamic:
-#  datasource:
-#    oabase:
-#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#      url: jdbc:sqlserver://172.16.0.48:1433;DatabaseName=A8V5
-#      username: OAadmin
-#      password: OAadmin_123
-#    cozybase:
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://172.16.1.42:3306/cozy_sit?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-#      username: root
-#      password: qwerQWER1234!@#$
+dynamic:
+  datasource:
+    oabase:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://39.101.185.68:1433;DatabaseName=UFDATA_616_2021
+      username: sa
+      password: hndc888$

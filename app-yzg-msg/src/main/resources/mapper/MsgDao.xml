@@ -2,4 +2,116 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yzg.modules.msg.dao.MsgDao">
 
+    <select id="queryDailyDeliveryReport" resultType="com.yzg.modules.msg.entity.DailyDelivery">
+        SELECT
+            t.cinvccode AS 'cinvccode',
+            t.cInvCName AS 'cinvcname',
+            isnull(a.cinvstd,'') AS 'cinvstd',
+            convert(decimal(8,0),ISNULL(a.fhNB,0)) AS 'drfh',
+            convert(decimal(8,0),ISNULL(b.fhNB,0)) AS 'ylfh',
+            convert(decimal(8,0),ISNULL(d.bhNB,0)) AS 'drbh',
+            convert(decimal(8,0),ISNULL(e.wfNB,0)) AS 'wf',
+            convert(decimal(8,0),ISNULL(c.kcNB,0)) AS 'kc'
+        FROM
+          InventoryClass t
+        LEFT JOIN
+        (
+            SELECT
+            t.cinvstd,
+            t.cinvccode,
+            SUM(t.iquantity) fhNB
+            FROM
+            kcsaleoutlist t
+            WHERE
+            ddate='2022-10-30'
+            AND t.cwhcode IN ('1001','2037')
+            AND t.cstcode='11'
+            GROUP BY
+            t.cinvstd,
+            t.cinvccode
+        ) a
+        ON
+        t.cinvccode = a.cinvccode
+        LEFT JOIN
+        (
+            SELECT
+            t.cinvstd,
+            t.cinvccode,
+            SUM(t.iquantity) as fhNB
+            FROM
+            kcsaleoutlist t
+            WHERE
+            substring(convert(varchar(10),t.ddate,112),1,6) = #{dataMonth}
+            AND t.cwhcode IN ('1001','2037')
+            AND t.cstcode='11'
+            GROUP BY
+            t.cinvstd,
+            t.cinvccode
+        ) b
+        ON
+        t.cinvccode = b.cinvccode AND a.cinvstd = b.cinvstd
+        LEFT JOIN
+        (
+            SELECT
+            substring(cInvCode,1,4) AS cinvccode,
+            cInvStd AS cinvstd,
+            SUM(iQuantity) AS kcNB
+            FROM
+            SA_BatchRef
+            WHERE
+            cWhcode = '1001'
+            GROUP BY
+            substring(cInvCode,1,4),
+            cInvStd
+            HAVING
+            SUM(iQuantity) > 0
+        ) c
+        ON
+        t.cinvccode = c.cinvccode AND a.cinvstd =c.cinvstd
+        LEFT JOIN
+        (
+            SELECT
+            substring(d.cInvCode,1,4) AS cinvccode,
+            SUM(d.iQuantity) AS bhNB
+            FROM
+            SO_SODetails d
+            INNER JOIN
+            SO_SOMain m
+            ON
+            d.cSOCode = m.cSOCode
+            WHERE
+            m.dDate = #{dataDate}
+            AND m.cSTCode = '11'
+            AND m.cDepCode IN ('1806',
+            '1807')
+            GROUP BY
+            substring(d.cInvCode,1,4)
+        ) d
+        ON
+        t.cinvccode = d.cinvccode
+        LEFT JOIN
+        (
+            SELECT
+              substring(d.cInvCode,1,4) AS cinvccode,
+              SUM(d.iQuantity) AS wfNB
+            FROM
+              SO_SODetails d
+            INNER JOIN
+              SO_SOMain m
+            ON
+              d.cSOCode = m.cSOCode
+            WHERE
+            m.dDate = #{dataDate}
+            AND m.cSTCode = '11'
+            AND m.cDepCode IN ('1806', '1807')
+            AND ISNULL(m.iStatus,'0') &lt;&gt;  '1'
+            GROUP BY
+            substring(d.cInvCode,1,4)
+        ) e
+        ON
+        t.cinvccode = e.cinvccode
+        WHERE
+        substring(t.cinvccode,1,2) = '21'
+        AND t.iInvCGrade = '2'
+    </select>
 </mapper>

@@ -10,6 +10,8 @@ import com.dingtalk.api.response.OapiRobotSendResponse;
 import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import javax.crypto.Mac;
@@ -28,8 +30,8 @@ import java.util.List;
  * @createDate: 2022/10/27 15:54
  **/
 
-@Slf4j
 public class DingTalkUtil {
+    protected static Logger logger = LoggerFactory.getLogger(DingTalkUtil.class);
 
     /**
      * 钉钉群设置 webhook
@@ -88,8 +90,9 @@ public class DingTalkUtil {
 
     /**
      * 签名方式条用
+     *
      * @param accessToken webhook 地址
-     * @param secret     签名
+     * @param secret      签名
      * @return
      */
     public static DingTalkUtil of(String accessToken, String secret) {
@@ -98,6 +101,7 @@ public class DingTalkUtil {
 
     /**
      * 仅地址
+     *
      * @param accessToken webhook 地址
      */
     private DingTalkUtil(String accessToken) {
@@ -167,7 +171,7 @@ public class DingTalkUtil {
             OapiRobotSendResponse response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】消息发送演示示例 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[ApiException]: 消息发送演示示例, 异常捕获{}", e.getMessage());
+            logger.error("[ApiException]: 消息发送演示示例, 异常捕获{}", e.getMessage());
         }
     }
 
@@ -209,7 +213,7 @@ public class DingTalkUtil {
             response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】发送普通文本消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[发送普通文本消息]: 发送消息失败, 异常捕获{}", e.getMessage());
+            logger.error("[发送普通文本消息]: 发送消息失败, 异常捕获{}", e.getMessage());
         }
         return response;
     }
@@ -250,7 +254,7 @@ public class DingTalkUtil {
             response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】发送link 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[发送link 类型消息]: 发送消息失败, 异常捕获{}", e.getMessage());
+            logger.error("[发送link 类型消息]: 发送消息失败, 异常捕获{}", e.getMessage());
         }
         return response;
     }
@@ -295,7 +299,7 @@ public class DingTalkUtil {
             response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】发送link 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[发送link 类型消息]: 发送消息失败, 异常捕获{}", e.getMessage());
+            logger.error("[发送link 类型消息]: 发送消息失败, 异常捕获{}", e.getMessage());
         }
         return response;
     }
@@ -343,7 +347,7 @@ public class DingTalkUtil {
             response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】整体跳转ActionCard类型的发送消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[发送ActionCard 类型消息]: 整体跳转ActionCard类型的发送消息失败, 异常捕获{}", e.getMessage());
+            logger.error("[发送ActionCard 类型消息]: 整体跳转ActionCard类型的发送消息失败, 异常捕获{}", e.getMessage());
         }
         return response;
     }
@@ -389,7 +393,7 @@ public class DingTalkUtil {
             response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】独立跳转ActionCard类型发送消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[发送ActionCard 类型消息]: 独立跳转ActionCard类型发送消息失败, 异常捕获{}", e.getMessage());
+            logger.error("[发送ActionCard 类型消息]: 独立跳转ActionCard类型发送消息失败, 异常捕获{}", e.getMessage());
         }
         return response;
     }
@@ -421,7 +425,7 @@ public class DingTalkUtil {
             response = DingTalkUtil.client.execute(request);
             System.out.println("【DingTalkUtils】独立跳转ActionCard类型发送消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
-            log.error("[发送ActionCard 类型消息]: 独立跳转ActionCard类型发送消息失败, 异常捕获{}", e.getMessage());
+            logger.error("[发送ActionCard 类型消息]: 独立跳转ActionCard类型发送消息失败, 异常捕获{}", e.getMessage());
         }
         return response;
     }

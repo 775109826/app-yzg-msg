@@ -6,6 +6,12 @@ package com.yzg.common.dingTaik.config;
  * @createDate: 2022/10/29 10:36
  **/
 public enum RobotConfig {
+
+    //发货日报
+    DailyDeliveryReportRoboot("001","url",""),
+    //资金日报
+    FundDailyReportRoboot("002","url",""),
+
     /**
      * 测试机器人
      */

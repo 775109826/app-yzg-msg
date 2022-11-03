@@ -119,6 +119,10 @@ public class FreemarkeTools {
         FileOutputStream fout = null;
         try {
             File f = new File(inputFileName);
+
+
+
+
             Java2DRenderer renderer = new Java2DRenderer(f, widthImage, heightImage);
             BufferedImage image = renderer.getImage();
             FSImageWriter imageWriter = new FSImageWriter();
