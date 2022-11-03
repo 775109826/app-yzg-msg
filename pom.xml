@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>com.yzg</groupId>
-    <artifactId>yzg</artifactId>
+    <artifactId>app-yzg-msg</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>yzg</name>
     <description>yzg</description>
