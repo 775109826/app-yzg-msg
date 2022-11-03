@@ -2,12 +2,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style>
-        table {
+        .my-table {
             border: 1px solid black;
             border-color: #69CDD2;
         }
-
-        th {
+        .title {
             height: 50px;
             text-align: center;
             color: #ffffff;
@@ -17,35 +16,43 @@
             border: 1px solid black;
             border-color: #3262E8;
         }
-
+        .title-2{
+            border-color: #ffffff;
+        }
         td {
+            height: 35px;
             border: 1px solid black;
             border-color: #69CDD2;
             text-align: center;
         }
-
         .total {
-            height: 50px;
+            height: 35px;
             text-align: center;
             border: 1px solid black;
             border-color: #9AD9E8;
+            background-color: #9AD9E8;
         }
+
+
     </style>
 </head>
 
 <body>
 
 <div>
-    <table cellspacing="0" cellpadding="0" width='100%'>
-        <caption>
-            <div>
-                <img style="text-align: start;display:inline-block;"
-                     src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
-                     width="100" height="30"/>
-                <a style="text-align: center;display:inline-block;">销售日报表</a>
-            </div>
-        </caption>
-        <tr>
+    <div>
+        <table border="0" cellspacing="0" cellpadding="0" width='100%'>
+            <tr class="title-2">
+                <th style="width: 15%;text-align: left"><img style="text-align: start;display:inline-block;"
+                         src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
+                         width="100" height="50"/></th>
+                <th style="text-align: center;font-size:24px;color: black">销售日报表</th>
+                <th style="width: 15%"></th>
+            </tr>
+        </table>
+    </div>
+    <table cellspacing="0" cellpadding="0" width='100%' class="my-table">
+        <tr class="title">
             <th>品名</th>
             <th>规格</th>
             <th>当日发货</th>
