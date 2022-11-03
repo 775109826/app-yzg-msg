@@ -46,7 +46,6 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
         Map<String, Object> resultMap = Maps.newHashMap();
         if (Optional.fromNullable(dailyDeliveryList).isPresent()) {
             String sumName = "合计";
-            String sumCinvccode = "999999";
             BigDecimal sumDrfh = BigDecimal.ZERO;
             BigDecimal sumYlfh = BigDecimal.ZERO;
             BigDecimal sumDrbh = BigDecimal.ZERO;
@@ -65,7 +64,6 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
                 try {
                     dailyDelivery = (DailyDelivery) clazz.newInstance();
                     dailyDelivery.setCinvcname(sumName);
-                    dailyDelivery.setCinvccode(sumCinvccode);
                     dailyDelivery.setDrfh(sumDrfh);
                     dailyDelivery.setYlfh(sumYlfh);
                     dailyDelivery.setDrbh(sumDrbh);

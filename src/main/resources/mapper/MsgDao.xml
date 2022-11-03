@@ -6,7 +6,6 @@
         SELECT
             t.cinvccode AS 'cinvccode',
             t.cInvCName AS 'cinvcname',
-            isnull(a.cinvstd,'') AS 'cinvstd',
             convert(decimal(8,0),ISNULL(a.fhNB,0)) AS 'drfh',
             convert(decimal(8,0),ISNULL(b.fhNB,0)) AS 'ylfh',
             convert(decimal(8,0),ISNULL(d.bhNB,0)) AS 'drbh',
@@ -17,7 +16,6 @@
         LEFT JOIN
         (
             SELECT
-            t.cinvstd,
             t.cinvccode,
             SUM(t.iquantity) fhNB
             FROM
@@ -27,7 +25,6 @@
             AND t.cwhcode IN ('1001','2037')
             AND t.cstcode='11'
             GROUP BY
-            t.cinvstd,
             t.cinvccode
         ) a
         ON
@@ -35,7 +32,6 @@
         LEFT JOIN
         (
             SELECT
-            t.cinvstd,
             t.cinvccode,
             SUM(t.iquantity) as fhNB
             FROM
@@ -45,29 +41,26 @@
             AND t.cwhcode IN ('1001','2037')
             AND t.cstcode='11'
             GROUP BY
-            t.cinvstd,
             t.cinvccode
         ) b
         ON
-        t.cinvccode = b.cinvccode AND a.cinvstd = b.cinvstd
+        t.cinvccode = b.cinvccode
         LEFT JOIN
         (
             SELECT
             substring(cInvCode,1,4) AS cinvccode,
-            cInvStd AS cinvstd,
             SUM(iQuantity) AS kcNB
             FROM
             SA_BatchRef
             WHERE
             cWhcode = '1001'
             GROUP BY
-            substring(cInvCode,1,4),
-            cInvStd
+            substring(cInvCode,1,4)
             HAVING
             SUM(iQuantity) > 0
         ) c
         ON
-        t.cinvccode = c.cinvccode AND a.cinvstd =c.cinvstd
+        t.cinvccode = c.cinvccode
         LEFT JOIN
         (
             SELECT

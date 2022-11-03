@@ -1,5 +1,6 @@
 package com.yzg.modules.msg.merge;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateUtil;
 import com.yzg.common.dingTaik.config.RobotConfig;
 import com.yzg.common.dingTaik.util.DingTalkUtil;
@@ -47,6 +48,7 @@ public class MsgClient {
             List<DailyDelivery> dailyDeliveryList = (List<DailyDelivery>) resultMap.get("dataList");
             modelMap.put("entityList", dailyDeliveryList);
             modelMap.put("sumItem", resultMap.get("dataItem"));
+            modelMap.put("dataDate",DateUtil.format(DateUtil.date(),"yyyy年MM月dd日"));
             String html = FreemarkeTools.getTemplate(modelMap, templateName);
             String path = filePath.concat(DateUtil.format(DateUtil.date(), "yyyyMMdd")).concat("/");
             FileUtils.mkdirsFilePath(path);
@@ -54,8 +56,8 @@ public class MsgClient {
             String htmlFilePath = path + "sdr" + timestamp + ".html";
             String imageFileName = "sdr" + timestamp + ".png";
             String imageFilePath = path + imageFileName;
-            int height = 200 + dailyDeliveryList.size() * 35;
-            FreemarkeTools.turnImage(html, htmlFilePath, imageFilePath, 500, height);
+            int height = dailyDeliveryList.size() * 40;
+            FreemarkeTools.turnImage(html, htmlFilePath, imageFilePath, 600, height);
             //拼接图片
             markDownStr.append("> ![screenshot](").append(imageFileName).append(")").append(hh);
 //            ding.sendMessageByMarkdown("发货日报", Convert.toStr(markDownStr), null, false);
