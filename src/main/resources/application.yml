@@ -76,7 +76,7 @@ file:
 dd:
   #企业id
   corpId: ding571ba8ce341ec80b24f2f5cc6abecb85
-#  agentId: 15621011
+  #  agentId: 15621011
   #企业内部应用的AppKey
   appKey: dingpwv5k18zktatz2ug
   #企业内部应用的AppSecret

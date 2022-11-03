@@ -61,24 +61,24 @@
                 <td>${item.cinvstd!""}</td>
                 <td>${item.drfh!""}</td>
                 <td>${item.ylfh!""}</td>
+                <td>${item.fhRatio!""}</td>
                 <td>${item.drbh!""}</td>
                 <td>${item.wf!""}</td>
                 <td>${item.kc!""}</td>
-                <td>${item.fhRatio!""}</td>
             </tr>
         </#list>
         <tr class="total">
-            <td>合计</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${sumItem.cinvcname!""}</td>
+            <td>${sumItem.cinvstd!""}</td>
+            <td>${sumItem.drfh!""}</td>
+            <td>${sumItem.ylfh!""}</td>
+            <td>${sumItem.fhRatio!""}</td>
+            <td>${sumItem.drbh!""}</td>
+            <td>${sumItem.wf!""}</td>
+            <td>${sumItem.kc!""}</td>
         </tr>
         <tr>
-            <td colspan="8" style="text-align: right;padding-right: 10px;">制表人:广岛小男孩</td>
+            <td colspan="8" style="text-align: right;padding-right: 10px;">制表人:IT信息部</td>
         </tr>
     </table>
 </div>

@@ -38,11 +38,12 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
             return "0%";
         if (value2.compareTo(BigDecimal.ZERO) == 0)
             return "0%";
-        BigDecimal percentValue = NumberUtil.div(new BigDecimal(10), new BigDecimal(3), 4);
+        BigDecimal percentValue = NumberUtil.div(value1, value2, 4);
         return NumberUtil.decimalFormat("##,###.##%", percentValue);
     }
 
-    private void calcDailyDelivery(List<DailyDelivery> dailyDeliveryList) {
+    private Map<String, Object> calcDailyDelivery(List<DailyDelivery> dailyDeliveryList) {
+        Map<String, Object> resultMap = Maps.newHashMap();
         if (Optional.fromNullable(dailyDeliveryList).isPresent()) {
             String sumName = "合计";
             String sumCinvccode = "999999";
@@ -71,7 +72,7 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
                     dailyDelivery.setWf(sumWf);
                     dailyDelivery.setKc(sumKc);
                     dailyDelivery.setFhRatio(percent(dailyDelivery.getYlfh(), dailyDelivery.getYlfh()));
-                    dailyDeliveryList.add(dailyDelivery);
+                    resultMap.put("dataItem", dailyDelivery);
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -83,19 +84,19 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
             for (DailyDelivery item : dailyDeliveryList) {
                 item.setFhRatio(percent(item.getYlfh(), dailyDelivery.getYlfh()));
             }
-            dailyDeliveryList.add(dailyDelivery);
+            resultMap.put("dataList", dailyDeliveryList);
         }
+        return resultMap;
     }
 
     @Override
-    public List<DailyDelivery> queryDailyDeliveryReport(Date currentDate) throws Exception {
+    public Map<String, Object> queryDailyDeliveryReport(Date currentDate) throws Exception {
         String dataDate = DateUtil.format(currentDate, "yyyy-MM-dd");
         String dataMonth = DateUtil.format(currentDate, "yyyyMM");
         Map<String, Object> params = Maps.newHashMap();
         params.put("dataDate", dataDate);
         params.put("dataMonth", dataMonth);
         List<DailyDelivery> dailyDeliveryList = this.baseMapper.queryDailyDeliveryReport(params);
-        this.calcDailyDelivery(dailyDeliveryList);
-        return dailyDeliveryList;
+        return this.calcDailyDelivery(dailyDeliveryList);
     }
 }

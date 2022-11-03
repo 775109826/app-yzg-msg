@@ -1,17 +1,16 @@
 package com.yzg.modules.schedule;
 
 import cn.hutool.core.date.DateUtil;
-import com.yzg.modules.msg.entity.DailyDelivery;
-import com.yzg.modules.msg.merge.MsgMerge;
+import com.yzg.modules.msg.merge.MsgClient;
 import com.yzg.modules.msg.service.MsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
+import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @description:描述 计划任务
@@ -22,16 +21,11 @@ import java.util.List;
 @Component("msgScheduled")
 public class MsgScheduled {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-    /**
-     * 获取图片存储路径
-     */
-    @Value("${file.uploadpath.msg}")
-    private String filePath;
 
     @Autowired
     private MsgService msgService;
-
-
+    @Resource
+    private MsgClient msgClient;
     /**
      * 任务计划-1
      */
@@ -39,8 +33,8 @@ public class MsgScheduled {
     @PostConstruct
     public void test01() {
         try {
-            List<DailyDelivery> dailyDeliveries = msgService.queryDailyDeliveryReport(DateUtil.date());
-            MsgMerge.of().mergeDeliverGoods(dailyDeliveries);
+            Map<String, Object> resultMap = msgService.queryDailyDeliveryReport(DateUtil.date());
+            msgClient.mergeDeliverGoods(resultMap);
         } catch (Exception e) {
             logger.error("执行计划-失败.错误原因:" + e);
         }

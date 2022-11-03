@@ -38,7 +38,7 @@ spring:
 ##多数据源的配置
 dynamic:
   datasource:
-    oabase:
+    u8base:
       driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
       url: jdbc:sqlserver://39.101.185.68:1433;DatabaseName=UFDATA_616_2021
       username: sa

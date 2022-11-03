@@ -1,6 +1,7 @@
 package com.yzg.modules.msg.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yzg.common.datasource.annotation.DataSource;
 import com.yzg.modules.msg.entity.DailyDelivery;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,5 +16,6 @@ import java.util.Map;
 @Mapper
 public interface MsgDao extends BaseMapper<Map> {
 
+    @DataSource("u8base")
     List<DailyDelivery> queryDailyDeliveryReport(Map<String, Object> params);
 }

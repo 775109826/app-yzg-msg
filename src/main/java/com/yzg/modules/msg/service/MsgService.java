@@ -14,5 +14,5 @@ import java.util.Map;
  **/
 public interface MsgService extends IService<Map> {
 
-    List<DailyDelivery> queryDailyDeliveryReport(Date currentDate) throws Exception;
+    Map<String, Object> queryDailyDeliveryReport(Date currentDate) throws Exception;
 }
