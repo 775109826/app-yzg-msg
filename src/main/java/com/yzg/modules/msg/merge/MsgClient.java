@@ -8,12 +8,15 @@ import com.yzg.common.dingTaik.util.DingTalkUtil;
 import com.yzg.common.freemarketools.FreemarkeTools;
 import com.yzg.common.util.FileUtils;
 import com.yzg.modules.msg.entity.DailyDelivery;
+import com.yzg.modules.msg.service.MsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,28 +28,27 @@ import java.util.Map;
 @Component
 public class MsgClient {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    private MsgService msgService;
     /**
      * 获取生成图片路径
      */
     @Value("${file.uploadpath.image}")
     private String filePath;
     /**
-     * 获取生成图片路径
-     */
-    @Value("${file.uploadpath.image}")
-    private String callPath;
-    /**
      * 换行(建议\n前后各添加两个空格)
      */
     public String hh = "  \n  ";
+
     /**
      * 消息拼接-发货日报
      *
      * @return
      */
-    public void mergeDeliverGoods(Map<String, Object> resultMap) {
+    public void mergeDeliverGoods(Date currentDate) {
         //获取指定机器人
-        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.testRobot.getWebhook(), RobotConfig.testRobot.getSecret());
+        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.DailyDeliveryReportRoboot.getWebhook(), RobotConfig.DailyDeliveryReportRoboot.getSecret());
+//        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.testRobot.getWebhook(), RobotConfig.testRobot.getSecret());
         StringBuffer markDownStr = new StringBuffer();
         String templateName = "sale_day_report";
         ModelMap modelMap = new ModelMap();
@@ -54,10 +56,11 @@ public class MsgClient {
         String path = filePath.concat(outDate).concat("/");
         try {
             // 参数填充
+            Map<String, Object> resultMap = msgService.queryDailyDeliveryReport(currentDate);
             List<DailyDelivery> dailyDeliveryList = (List<DailyDelivery>) resultMap.get("dataList");
             modelMap.put("entityList", dailyDeliveryList);
             modelMap.put("sumItem", resultMap.get("dataItem"));
-            modelMap.put("dataDate",DateUtil.format(DateUtil.date(),"yyyy年MM月dd日"));
+            modelMap.put("dataDate", DateUtil.format(DateUtil.date(), "yyyy年MM月dd日"));
             String html = FreemarkeTools.getTemplate(modelMap, templateName);
             FileUtils.mkdirsFilePath(path);
             String timestamp = DateUtil.format(DateUtil.date(), "yyyyMMddHHmmss");
@@ -68,10 +71,10 @@ public class MsgClient {
             FreemarkeTools.turnImage(html, htmlFilePath, imageFilePath, 600, height);
 
             // 拼接图片nginx地址
-            String nginxImage= Constant.nginxImageUrl.concat(outDate).concat("/").concat(imageFileName);
+            String nginxImage = Constant.nginxImageUrl.concat(outDate).concat("/").concat(imageFileName);
             //拼接markDown文本发送图片
             markDownStr.append("> ![screenshot](").append(nginxImage).append(")").append(hh);
-           ding.sendMessageByMarkdown("发货日报", Convert.toStr(markDownStr), null, false);
+            ding.sendMessageByMarkdown("发货日报", Convert.toStr(markDownStr), null, false);
         } catch (Exception e) {
             logger.error("机器人-发货日报-消息发送失败,错误原因:" + e);
         }

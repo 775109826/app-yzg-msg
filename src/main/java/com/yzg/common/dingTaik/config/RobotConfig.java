@@ -8,7 +8,7 @@ package com.yzg.common.dingTaik.config;
 public enum RobotConfig {
 
     //发货日报
-    DailyDeliveryReportRoboot("001","url",""),
+    DailyDeliveryReportRoboot("001","https://oapi.dingtalk.com/robot/send?access_token=a90af2613aaea2bc412fc4d16d86fd730fee35f28dfcd51b8760cf78e94fd53a","SECae45371e871a5fbe7b74b015750d7fb057926a7fd0a4ea7f3f45fe3da3fbde62"),
     //资金日报
     FundDailyReportRoboot("002","url",""),
 

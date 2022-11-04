@@ -2,15 +2,14 @@ package com.yzg.modules.schedule;
 
 import cn.hutool.core.date.DateUtil;
 import com.yzg.modules.msg.merge.MsgClient;
-import com.yzg.modules.msg.service.MsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.Map;
+import java.util.Date;
 
 /**
  * @description:描述 计划任务
@@ -21,24 +20,19 @@ import java.util.Map;
 @Component("msgScheduled")
 public class MsgScheduled {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
-
-    @Autowired
-    private MsgService msgService;
     @Resource
     private MsgClient msgClient;
+
     /**
      * 任务计划-1
      */
-    // @Scheduled(cron = "0 0 9 * * ?")
-    @PostConstruct
-    public void test01() {
+    @Scheduled(cron = "${app.task.pushdailydeliveryreport}")
+    public void sendDailyDeliveryReport() {
         try {
-            Map<String, Object> resultMap = msgService.queryDailyDeliveryReport(DateUtil.date());
-            msgClient.mergeDeliverGoods(resultMap);
+            Date currentDate = DateUtil.date();
+            msgClient.mergeDeliverGoods(currentDate);
         } catch (Exception e) {
             logger.error("执行计划-失败.错误原因:" + e);
         }
-
     }
-
 }

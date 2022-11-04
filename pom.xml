@@ -11,12 +11,11 @@
     <groupId>com.yzg</groupId>
     <artifactId>app-yzg-msg</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>yzg</name>
-    <description>yzg</description>
+    <name>app-yzg-msg</name>
+    <description>app-yzg-msg</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
 
     <dependencies>
         <dependency>

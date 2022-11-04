@@ -67,7 +67,9 @@ log:
     file:
       name: yzg-error
 
-
+app:
+  task:
+    pushdailydeliveryreport: 0/5 * * * * ?
 ##图片文件路径
 file:
   uploadpath:
