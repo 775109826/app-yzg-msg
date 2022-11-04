@@ -42,14 +42,18 @@
 
 <div>
     <div>
-        <div style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">杨掌柜食品科技（河南）有限公司</div>
         <table border="0" cellspacing="0" cellpadding="0" width='100%'>
             <tr class="title-2">
                 <th style="width: 20%;text-align: left">
-                    <img style="text-align: start;display:inline-block;" src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
-                         width="150" height="50"/></th>
-                <th style="text-align: center;font-size:32px;color: black">发货日报表</th>
-                <th style="width: 20%;text-align: right;font-size: 28px;">${dataDate}</th>
+                    <img style="text-align: start;display:inline-block;"
+                         src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
+                         width="220" height="100"/></th>
+                <th style="text-align: center;font-size:32px;color: black">
+                    <b style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">杨掌柜食品科技（河南）有限公司</b>
+                    <br/>
+                    <b style="text-align: center;width: 100%;font-size: 32px;font-weight: bold;">发货日报表</b>
+                </th>
+                <th style="width: 20%;font-size: 28px;text-align: right;"><div style="padding-top: 50px">${dataDate}</div></th>
             </tr>
         </table>
     </div>
