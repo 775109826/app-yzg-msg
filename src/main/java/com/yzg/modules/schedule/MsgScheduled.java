@@ -23,9 +23,6 @@ public class MsgScheduled {
     @Resource
     private MsgClient msgClient;
 
-    /**
-     * 任务计划-1
-     */
     @Scheduled(cron = "${app.task.pushdailydeliveryreport}")
     public void sendDailyDeliveryReport() {
         try {

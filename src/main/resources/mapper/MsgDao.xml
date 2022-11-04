@@ -108,4 +108,53 @@
         AND t.iInvCGrade = '2'
         order by t.cinvccode
     </select>
+
+    <select id="queryKCCashInstance" resultType="map">
+        SELECT
+            '1001'      AS 'code',
+            '库存现金' AS 'name',
+            g.me     AS 'amount'
+        FROM
+            GL_accsum g
+        WHERE
+            g.iYPeriod = #{dataMonth}
+        AND g.ccode = '1001'
+    </select>
+
+    <select id="queryAmountInstance" resultType="map">
+        SELECT
+            sum(case when substring(g.ccode,1,4) in ('1001','1002') then g.md end) as 'srAmount',
+            sum(case when substring(g.ccode,1,4) in ('1001','1002') then g.mc end) as 'zfAmount',
+            sum(case when substring(g.ccode,1,4) in ('1002') then g.me end) as 'yeAmount'
+        FROM
+            GL_accsum g
+        INNER JOIN
+           (
+              select distinct ccode,ccode_name  from vwVoucherData
+           )  a
+           on g.ccode=a.ccode
+        WHERE
+          g.iYPeriod = #{dataMonth}
+        AND substring(g.ccode,1,4) in ('1001','1002')
+    </select>
+
+    <select id="queryAmountList" resultType="com.yzg.modules.msg.entity.FundDaily">
+        SELECT
+            g.ccode      AS 'code',
+            a.ccode_name AS 'name',
+            g.md         AS 'rkAmount',
+            g.mc         as 'zfAmount',
+            g.me         as 'yeAmount'
+        FROM
+            GL_accsum g
+        INNER JOIN
+           (
+              select distinct ccode,ccode_name  from vwVoucherData
+           )  a
+           on g.ccode=a.ccode
+        WHERE
+          g.iYPeriod = #{dataMonth}
+        AND substring(g.ccode,1,4) in ('1001','1002')
+        order by g.ccode
+    </select>
 </mapper>

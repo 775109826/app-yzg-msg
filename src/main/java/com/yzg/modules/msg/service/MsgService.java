@@ -1,10 +1,8 @@
 package com.yzg.modules.msg.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yzg.modules.msg.entity.DailyDelivery;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,4 +13,6 @@ import java.util.Map;
 public interface MsgService extends IService<Map> {
 
     Map<String, Object> queryDailyDeliveryReport(Date currentDate) throws Exception;
+
+    Map<String, Object> queryFundDailyReport(Date currentDate) throws Exception;
 }
