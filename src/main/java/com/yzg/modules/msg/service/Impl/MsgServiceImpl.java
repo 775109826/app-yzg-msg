@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.yzg.modules.msg.dao.MsgDao;
 import com.yzg.modules.msg.entity.DailyDelivery;
@@ -111,7 +112,7 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
             resultMap.put("kcCash", kcCashMap);
             resultMap.put("amountInstance", amountInstanceMap);
             List<FundDaily> amountList = this.baseMapper.queryAmountList(dataMonth);
-            resultMap.put("amountList", amountList);
+            resultMap.put("amountList", Optional.fromNullable(amountList).isPresent() ? amountList : Lists.newArrayList());
             String code = "9999";
             String name = "合计";
             BigDecimal sumRkAmount = BigDecimal.ZERO;
@@ -129,7 +130,7 @@ public class MsgServiceImpl extends ServiceImpl<MsgDao, Map> implements MsgServi
                 sumFundDaily.setRkAmount(sumRkAmount);
                 sumFundDaily.setZfAmount(sumZfAmount);
                 sumFundDaily.setYeAmount(sumYeAmount);
-                resultMap.put("sumData", sumFundDaily);
+                resultMap.put("sumItem", sumFundDaily);
             }
         } catch (Exception e) {
             logger.error("汇总资金日报失败，错误原因{}，请联系系统管理员！", e.toString());

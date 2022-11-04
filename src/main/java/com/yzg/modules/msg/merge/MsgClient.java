@@ -10,6 +10,7 @@ import com.yzg.common.dingTaik.util.DingTalkUtil;
 import com.yzg.common.freemarketools.FreemarkeTools;
 import com.yzg.common.util.FileUtils;
 import com.yzg.modules.msg.entity.DailyDelivery;
+import com.yzg.modules.msg.entity.FundDaily;
 import com.yzg.modules.msg.service.MsgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,7 +121,7 @@ public class MsgClient {
         ModelMap modelMap = new ModelMap();
         // 机器人模板和生成图片前缀配置
         String templateName = "sale_day_report";
-        String beforeName = "sdr";
+        String beforeName = "SDR";
         try {
             // 参数填充
             Map<String, Object> resultMap = msgService.queryDailyDeliveryReport(currentDate);
@@ -133,6 +134,38 @@ public class MsgClient {
             //拼接markDown文本发送图片
             markDownStr.append("> ![screenshot](").append(imageUrl).append(")").append(hh);
             ding.sendMessageByMarkdown("发货日报", Convert.toStr(markDownStr), null, false);
+        } catch (Exception e) {
+            logger.error("机器人-发货日报-消息发送失败,错误原因:" + e);
+        }
+    }
+
+    /**
+     * 消息拼接-发货日报
+     *
+     * @return
+     */
+    public void mergeFundDailyReport(Date currentDate) {
+        //获取指定机器人
+        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.Robot.testRobot.getWebhook(), RobotConfig.Robot.testRobot.getSecret());
+        StringBuffer markDownStr = new StringBuffer();
+        ModelMap modelMap = new ModelMap();
+        // 机器人模板和生成图片前缀配置
+        String templateName = "fund_day_report";
+        String beforeName = "FDR";
+        try {
+            // 参数填充
+            Map<String, Object> resultMap = msgService.queryFundDailyReport(currentDate);
+            modelMap.put("kcCash", resultMap.get("kcCash"));
+            modelMap.put("amountInstance", resultMap.get("amountInstance"));
+            List<FundDaily> fundDailyList = (List<FundDaily>)resultMap.get("amountList");
+            modelMap.put("amountList", resultMap.get("amountList"));
+            modelMap.put("sumItem", resultMap.get("sumItem"));
+            modelMap.put("dataDate", DateUtil.format(DateUtil.date(), "yyyy年MM月dd日"));
+            //生成图片
+            String imageUrl = createImage(templateName, modelMap, beforeName, RobotConfig.RobotTypeUrl.goodsImage, fundDailyList.size(), 0, 450);
+            //拼接markDown文本发送图片
+            markDownStr.append("> ![screenshot](").append(imageUrl).append(")").append(hh);
+            ding.sendMessageByMarkdown("资金日报", Convert.toStr(markDownStr), null, false);
         } catch (Exception e) {
             logger.error("机器人-发货日报-消息发送失败,错误原因:" + e);
         }

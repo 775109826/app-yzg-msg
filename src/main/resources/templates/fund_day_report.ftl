@@ -28,17 +28,16 @@
         }
 
         .panel {
-            margin-bottom: 5px;
+            margin-bottom: 0px;
             width: 100%;
             text-align: center;
             border: 1px solid black;
-            border-color: #aaaaaa;
-
+            border-color: #69CDD2;
             /*background-color: #aaaaaa;*/
         }
 
         .padding-xs {
-            padding: 10px;
+            padding: 5px;
         }
 
         .padding-sm {
@@ -76,20 +75,50 @@
         .text-bold {
             font-weight: bold;
         }
+
+        .total {
+            height: 50px;
+            text-align: center;
+            border: 1px solid black;
+            border-color: #9AD9E8;
+            background-color: #9AD9E8;
+        }
+
+        .title-2{
+            border-color: #ffffff;
+        }
     </style>
 </head>
 
 <body>
 <div>
     <#--    标题-->
-    <div style="text-align: center;width: 100%;">
-        <div class="padding-xs text-xl" style="font-weight: bold;">标题</div>
+    <#--<div style="text-align: center;width: 100%;">
+        <div class="padding-xs text-xl" style="font-weight: bold;">杨掌柜食品科技（河南）有限公司</div>
+    </div>-->
+
+    <div style="padding-bottom: 30px">
+        <table border="0" cellspacing="0" cellpadding="0" width='100%'>
+            <tr class="title-2">
+                <th style="width: 20%;text-align: left">
+                    <img style="text-align: start;display:inline-block;"
+                         src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
+                         width="200" height="80"/></th>
+                <th style="text-align: center;font-size:32px;color: black">
+                    <b style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">杨掌柜食品科技（河南）有限公司</b>
+                    <br/>
+                    <b style="text-align: center;width: 100%;font-size: 32px;font-weight: bold;">资金日报表</b>
+                </th>
+                <th style="width: 20%;font-size: 28px;text-align: right;"><div style="padding-top: 50px">${dataDate}</div></th>
+            </tr>
+        </table>
     </div>
+
     <#--   概况 -->
     <div class="panel">
         <div>
             <div class="text-sm text-bold" style="padding-top: 5px">库存现金</div>
-            <div class="padding-xs" style="font-size: 38px;color: red">20,221</div>
+            <div class="padding-xs" style="font-size: 38px;color: red">${kcCash.amount!""}</div>
         </div>
         <#--    详情-->
         <div>
@@ -98,44 +127,49 @@
                     <th style="width: 33%;text-align: left">
                         <div class="padding-sm" style="text-align: center">
                             <div class="text-sm">收入</div>
-                            <div class="padding-xs text-sm">10,000</div>
+                            <div class="padding-xs text-sm">${amountInstance.srAmount!""}</div>
                         </div>
                     </th>
                     <th style="width: 33%;text-align: center;">
                         <div class="padding-sm" style="text-align: center">
                             <div class="text-sm">支出</div>
-                            <div class="padding-xs text-sm">10,000</div>
+                            <div class="padding-xs text-sm">${amountInstance.zfAmount!""}</div>
                         </div>
                     </th>
                     <th style="width: 33%;text-align: right;">
                         <div class="padding-sm" style="text-align: center">
                             <div class="text-sm">余额</div>
-                            <div class="padding-xs text-sm">10,000</div>
+                            <div class="padding-xs text-sm">${amountInstance.yeAmount!""}</div>
                         </div>
                     </th>
                 </tr>
             </table>
         </div>
     </div>
-
-
     <div style="">
         <table cellspacing="0" cellpadding="0" width='100%' class="my-table">
             <tr class="tableTitle">
-                <th>今日报货</th>
-                <th>今日报货</th>
-                <th>今日报货</th>
-                <th>今日报货</th>
+                <th>名称</th>
+                <th>收入（元）</th>
+                <th>支出（元）</th>
+                <th>余额（元）</th>
             </tr>
+            <#list amountList as item>
+                <tr>
+                    <td>${item.name!""}</td>
+                    <td>${item.rkAmount!""}</td>
+                    <td>${item.zfAmount!""}</td>
+                    <td>${item.yeAmount!""}</td>
+                </tr>
+            </#list>
             <tr class="total">
-                <td>总计</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
+                <td>${sumItem.name!""}</td>
+                <td>${sumItem.rkAmount!""}</td>
+                <td>${sumItem.zfAmount!""}</td>
+                <td>${sumItem.yeAmount!""}</td>
             </tr>
         </table>
     </div>
 </div>
-
 </body>
 </html>

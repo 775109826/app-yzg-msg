@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Date;
 
@@ -29,7 +28,17 @@ public class MsgScheduled {
             Date currentDate = DateUtil.date();
             msgClient.mergeDeliverGoods(currentDate);
         } catch (Exception e) {
-            logger.error("执行计划-失败.错误原因:" + e);
+            logger.error("发送日报执行计划-失败.错误原因:" + e);
+        }
+    }
+
+    @Scheduled(cron = "${app.task.funddailyreportroboot}")
+    public void sendFundDailyReportRoboot() {
+        try {
+            Date currentDate = DateUtil.date();
+            msgClient.mergeFundDailyReport(currentDate);
+        } catch (Exception e) {
+            logger.error("资金日报执行计划-失败.错误原因:" + e);
         }
     }
 }

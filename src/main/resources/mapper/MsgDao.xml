@@ -113,7 +113,7 @@
         SELECT
             '1001'      AS 'code',
             '库存现金' AS 'name',
-            g.me     AS 'amount'
+            isnull(g.me,0)     AS 'amount'
         FROM
             GL_accsum g
         WHERE
@@ -123,9 +123,9 @@
 
     <select id="queryAmountInstance" resultType="map">
         SELECT
-            sum(case when substring(g.ccode,1,4) in ('1001','1002') then g.md end) as 'srAmount',
-            sum(case when substring(g.ccode,1,4) in ('1001','1002') then g.mc end) as 'zfAmount',
-            sum(case when substring(g.ccode,1,4) in ('1002') then g.me end) as 'yeAmount'
+            isnull(sum(case when substring(g.ccode,1,4) in ('1001','1002') then g.md end),0) as 'srAmount',
+            isnull(sum(case when substring(g.ccode,1,4) in ('1001','1002') then g.mc end),0) as 'zfAmount',
+            isnull(sum(case when substring(g.ccode,1,4) in ('1002') then g.me end),0) as 'yeAmount'
         FROM
             GL_accsum g
         INNER JOIN
@@ -142,9 +142,9 @@
         SELECT
             g.ccode      AS 'code',
             a.ccode_name AS 'name',
-            g.md         AS 'rkAmount',
-            g.mc         as 'zfAmount',
-            g.me         as 'yeAmount'
+            isnull(g.md,0)         AS 'rkAmount',
+            isnull(g.mc,0)         as 'zfAmount',
+            isnull(g.me,0)         as 'yeAmount'
         FROM
             GL_accsum g
         INNER JOIN

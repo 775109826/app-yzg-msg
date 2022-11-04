@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @Slf4j
-@SpringBootTest
+//@SpringBootTest
 class YzgApplicationTests {
     @Value("${file.uploadpath.image}")
     private String filePath;
@@ -16,13 +16,13 @@ class YzgApplicationTests {
     @Test
     void contextLoads() {
         try {
-            DingTalkUtil ding = DingTalkUtil.of(RobotConfig.testRobot.getWebhook(), RobotConfig.testRobot.getSecret());
+//            DingTalkUtil ding = DingTalkUtil.of(RobotConfig.testRobot.getWebhook(), RobotConfig.testRobot.getSecret());
             // markDown文本
-            String markDownstr = "#### 杭州天气 @156xxxx8827\n" +
-                    "> 9度，西北风1级，空气良89，相对温度73%\n\n" +
-                    "> ![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" +
-                    "> ###### 10点20分发布 [天气](http://www.thinkpage.cn/) \n";
-            ding.sendMessageByMarkdown("我是标题", markDownstr, null, false);
+//            String markDownstr = "#### 杭州天气 @156xxxx8827\n" +
+//                    "> 9度，西北风1级，空气良89，相对温度73%\n\n" +
+//                    "> ![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" +
+//                    "> ###### 10点20分发布 [天气](http://www.thinkpage.cn/) \n";
+//            ding.sendMessageByMarkdown("我是标题", markDownstr, null, false);
           /*  ModelMap modelMap = new ModelMap();
             Map<String, Object> mainItem = Maps.newHashMap();
             mainItem.put("title", "reportName");

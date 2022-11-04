@@ -70,6 +70,7 @@ log:
 app:
   task:
     pushdailydeliveryreport: 0/5 * * * * ?
+    funddailyreportroboot: 0/5 * * * * ?
 ##图片文件路径
 file:
   uploadpath:
