@@ -42,13 +42,14 @@
 
 <div>
     <div>
+        <div style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">杨掌柜食品科技（河南）有限公司</div>
         <table border="0" cellspacing="0" cellpadding="0" width='100%'>
             <tr class="title-2">
-                <th style="width: 15%;text-align: left"><img style="text-align: start;display:inline-block;"
-                         src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
+                <th style="width: 20%;text-align: left">
+                    <img style="text-align: start;display:inline-block;" src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
                          width="150" height="50"/></th>
-                <th style="text-align: center;font-size:38px;color: black">发货日报表</th>
-                <th style="width: 15%;text-align: right;font-size: 26px;">${dataDate}</th>
+                <th style="text-align: center;font-size:32px;color: black">发货日报表</th>
+                <th style="width: 20%;text-align: right;font-size: 28px;">${dataDate}</th>
             </tr>
         </table>
     </div>
@@ -85,9 +86,9 @@
             <td>${sumItem.wf!""}</td>
             <td>${sumItem.kc!""}</td>
         </tr>
-        <tr>
-            <td colspan="7" style="text-align: right;padding-right: 10px;">制表人：管理中心-信息部</td>
-        </tr>
+<#--        <tr>-->
+<#--            <td colspan="7" style="text-align: right;padding-right: 10px;">制表人：管理中心-信息部</td>-->
+<#--        </tr>-->
     </table>
 </div>
 </body>
