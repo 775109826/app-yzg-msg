@@ -109,6 +109,7 @@ public class MsgClient {
         }
         return null;
     }
+
     /**
      * 消息拼接-发货日报
      *
@@ -157,12 +158,12 @@ public class MsgClient {
             Map<String, Object> resultMap = msgService.queryFundDailyReport(currentDate);
             modelMap.put("kcCash", resultMap.get("kcCash"));
             modelMap.put("amountInstance", resultMap.get("amountInstance"));
-            List<FundDaily> fundDailyList = (List<FundDaily>)resultMap.get("amountList");
+            List<FundDaily> fundDailyList = (List<FundDaily>) resultMap.get("amountList");
             modelMap.put("amountList", resultMap.get("amountList"));
             modelMap.put("sumItem", resultMap.get("sumItem"));
             modelMap.put("dataDate", DateUtil.format(DateUtil.date(), "yyyy年MM月dd日"));
             //生成图片
-            String imageUrl = createImage(templateName, modelMap, beforeName, RobotConfig.RobotTypeUrl.goodsImage, fundDailyList.size(), 0, 450);
+            String imageUrl = createImage(templateName, modelMap, beforeName, RobotConfig.RobotTypeUrl.fundImage, fundDailyList.size(), 0, 450);
             //拼接markDown文本发送图片
             markDownStr.append("> ![screenshot](").append(imageUrl).append(")").append(hh);
             ding.sendMessageByMarkdown("资金日报", Convert.toStr(markDownStr), null, false);
