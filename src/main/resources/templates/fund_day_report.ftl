@@ -119,7 +119,7 @@
     <#--   概况 -->
     <div class="panel">
         <div>
-            <div class="text-sm text-bold" style="padding-top: 5px">库存现金</div>
+            <div class="text-sm text-bold" style="padding-top: 5px">可用现金</div>
             <div class="padding-xs" style="font-size: 38px;color: red">${kcCash.amount!""}</div>
         </div>
         <#--    详情-->
@@ -164,7 +164,7 @@
                     <td>${item.yeAmount!""}</td>
                 </tr>
             </#list>
-            <tr class="total">
+            <tr class="total" style="background-color: #9AD9E8">
                 <td>${sumItem.name!""}</td>
                 <td>${sumItem.rkAmount!""}</td>
                 <td>${sumItem.zfAmount!""}</td>

@@ -155,6 +155,6 @@
         WHERE
           g.iYPeriod = #{dataMonth}
         AND substring(g.ccode,1,4) in ('1001','1002')
-        order by g.ccode
+        order by isnull(g.me,0) desc
     </select>
 </mapper>

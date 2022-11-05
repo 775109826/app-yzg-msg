@@ -83,7 +83,7 @@
                 <td>${item.kc!""}</td>
             </tr>
         </#list>
-        <tr class="total">
+        <tr class="total" style="background-color: #9AD9E8">
             <td>${sumItem.cinvcname!""}</td>
             <#--<td>${sumItem.cinvstd!""}</td>-->
             <td>${sumItem.drfh!""}</td>
