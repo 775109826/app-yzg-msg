@@ -6,7 +6,9 @@
             border: 1px solid black;
             border-color: #69CDD2;
         }
-
+        tr:nth-child(even) {
+            background: #f1f1f1;
+        }
         td {
             height: 40px;
             border: 1px solid black;
