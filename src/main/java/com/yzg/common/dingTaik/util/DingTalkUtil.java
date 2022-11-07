@@ -76,29 +76,6 @@ public class DingTalkUtil {
      * 客户端实例
      */
     private static DingTalkClient client;
-
-    private DingTalkUtil() {
-    }
-
-    public static DingTalkUtil of() {
-        return new DingTalkUtil();
-    }
-
-    public static DingTalkUtil of(String accessToken) {
-        return new DingTalkUtil(accessToken);
-    }
-
-    /**
-     * 签名方式条用
-     *
-     * @param accessToken webhook 地址
-     * @param secret      签名
-     * @return
-     */
-    public static DingTalkUtil of(String accessToken, String secret) {
-        return new DingTalkUtil(accessToken, secret);
-    }
-
     /**
      * 仅地址
      *
@@ -109,7 +86,7 @@ public class DingTalkUtil {
         client = new DefaultDingTalkClient(accessToken);
     }
 
-    private DingTalkUtil(String accessToken, String secret) {
+    public DingTalkUtil(String accessToken, String secret) {
         this.accessToken = accessToken;
         this.secret = secret;
         try {

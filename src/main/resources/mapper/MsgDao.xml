@@ -22,7 +22,7 @@
             kcsaleoutlist t
             WHERE
             ddate= #{dataDate}
-            AND t.cwhcode IN ('1001','2037')
+            AND t.cwhcode IN ('1001','2037','2029')
             AND t.cstcode='11'
             GROUP BY
             t.cinvccode
@@ -38,7 +38,7 @@
             kcsaleoutlist t
             WHERE
             substring(convert(varchar(10),t.ddate,112),1,6) = #{dataMonth}
-            AND t.cwhcode IN ('1001','2037')
+            AND t.cwhcode IN ('1001','2037','2029')
             AND t.cstcode='11'
             GROUP BY
             t.cinvccode

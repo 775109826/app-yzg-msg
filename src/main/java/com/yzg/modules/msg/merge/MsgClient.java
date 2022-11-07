@@ -117,7 +117,8 @@ public class MsgClient {
      */
     public void mergeDeliverGoods(Date currentDate) {
         //获取指定机器人
-        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.Robot.DailyDeliveryReportRoboot.getWebhook(), RobotConfig.Robot.DailyDeliveryReportRoboot.getSecret());
+        DingTalkUtil ding = new DingTalkUtil(RobotConfig.Robot.DailyDeliveryReportRoboot.getWebhook(), RobotConfig.Robot.DailyDeliveryReportRoboot.getSecret());
+//        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.Robot.testRobot.getWebhook(), RobotConfig.Robot.testRobot.getSecret());
         StringBuffer markDownStr = new StringBuffer();
         ModelMap modelMap = new ModelMap();
         // 机器人模板和生成图片前缀配置
@@ -147,7 +148,8 @@ public class MsgClient {
      */
     public void mergeFundDailyReport(Date currentDate) {
         //获取指定机器人
-        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.Robot.testRobot.getWebhook(), RobotConfig.Robot.testRobot.getSecret());
+        DingTalkUtil ding = new DingTalkUtil(RobotConfig.Robot.FundDailyReportRoboot.getWebhook(), RobotConfig.Robot.FundDailyReportRoboot.getSecret());
+//        DingTalkUtil ding = DingTalkUtil.of(RobotConfig.Robot.testRobot.getWebhook(), RobotConfig.Robot.testRobot.getSecret());
         StringBuffer markDownStr = new StringBuffer();
         ModelMap modelMap = new ModelMap();
         // 机器人模板和生成图片前缀配置

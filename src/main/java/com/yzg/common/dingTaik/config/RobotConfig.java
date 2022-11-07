@@ -14,7 +14,7 @@ public class RobotConfig {
         //发货日报
         DailyDeliveryReportRoboot("001", "https://oapi.dingtalk.com/robot/send?access_token=a90af2613aaea2bc412fc4d16d86fd730fee35f28dfcd51b8760cf78e94fd53a", "SECae45371e871a5fbe7b74b015750d7fb057926a7fd0a4ea7f3f45fe3da3fbde62"),
         //资金日报
-        FundDailyReportRoboot("002", "url", ""),
+        FundDailyReportRoboot("002", "https://oapi.dingtalk.com/robot/send?access_token=753569034ba6ec779d37bbace00f533d7b32a974feab4b9484a13944188795f2", "SEC9081e26f0df762aead96fd66cde88adf1fbcecc68daf0d7543aabf69b30661ed"),
 
         /**
          * 测试机器人
