@@ -69,8 +69,8 @@ log:
 
 app:
   task:
-    pushdailydeliveryreport: 0 0 8,13,20 * * ?
-    funddailyreportroboot: 0 0 8,13,20 * * ?
+    pushdailydeliveryreport: 0 0 19 * * ?
+    funddailyreportroboot: 0 0 19 * * ?
 ##图片文件路径
 file:
   uploadpath:

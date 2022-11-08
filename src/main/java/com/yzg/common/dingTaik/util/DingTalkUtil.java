@@ -8,7 +8,6 @@ import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiRobotSendRequest;
 import com.dingtalk.api.response.OapiRobotSendResponse;
 import com.taobao.api.ApiException;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,16 +74,7 @@ public class DingTalkUtil {
     /**
      * 客户端实例
      */
-    private static DingTalkClient client;
-    /**
-     * 仅地址
-     *
-     * @param accessToken webhook 地址
-     */
-    private DingTalkUtil(String accessToken) {
-        this.accessToken = accessToken;
-        client = new DefaultDingTalkClient(accessToken);
-    }
+    private DingTalkClient client;
 
     public DingTalkUtil(String accessToken, String secret) {
         this.accessToken = accessToken;
@@ -95,145 +85,6 @@ public class DingTalkUtil {
             e.printStackTrace();
         }
 
-    }
-
-
-    /**
-     * 官方演示示例
-     * title 是消息列表下透出的标题
-     * text 是进入群后看到的消息内容
-     * 注意事项：
-     * 1.文本，链接，Markdown会存在覆盖，推送最后一个定义的消息
-     * 2.自定义机器人关键字要包含在content或title中，text.setContent("");link.setTitle("");markdown.setTitle("");
-     *
-     * @return OapiRobotSendResponse
-     */
-
-    public static void sdkDemoJava() {
-        //请求对象
-        OapiRobotSendRequest request = new OapiRobotSendRequest();
-
-        //链接
-        request.setMsgtype("link");
-        OapiRobotSendRequest.Link link = new OapiRobotSendRequest.Link();
-        link.setMessageUrl("https://www.dingtalk.com/");
-        link.setPicUrl("");
-        link.setTitle("时代的火车向前开");
-        link.setText("这个即将发布的新版本，创始人阿Q称它为红树林。而在此之前，每当面临重大升级，产品经理们都会取一个应景的代号，这一次，为什么是红树林");
-        request.setLink(link);
-
-        //Markdown
-        request.setMsgtype("markdown");
-        OapiRobotSendRequest.Markdown markdown = new OapiRobotSendRequest.Markdown();
-        markdown.setTitle("南京的天气真好呀");
-        markdown.setText("#### 南京的天气真好呀 @130****1239\n" +
-                "> 9度，西北风1级，空气良89，相对温度73%\n\n" +
-                "> ![screenshot](https://gw.alicdn.com/tfs/TB1ut3xxbsrBKNjSZFpXXcXhFXa-846-786.png)\n" +
-                "> ###### 10点20分发布 [天气](http://www.thinkpage.cn/) \n");
-        request.setMarkdown(markdown);
-
-        //文本
-        request.setMsgtype("text");
-        OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();
-        text.setContent("大家好！我是 DingTalkRobot 机器人，很高兴为你们服务!");
-        request.setText(text);
-        OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
-        at.setAtMobiles(Arrays.asList("130****1239"));
-        // isAtAll类型如果不为Boolean，请升级至最新SDK
-        at.setIsAtAll(true);
-        at.setAtUserIds(Arrays.asList("109929", "32099"));
-        request.setAt(at);
-
-        try {
-            OapiRobotSendResponse response = DingTalkUtil.client.execute(request);
-            System.out.println("【DingTalkUtils】消息发送演示示例 响应参数：" + JSON.toJSONString(response));
-        } catch (ApiException e) {
-            logger.error("[ApiException]: 消息发送演示示例, 异常捕获{}", e.getMessage());
-        }
-    }
-
-
-    /**
-     * 发送普通文本消息
-     *
-     * @param content    文本消息
-     * @param mobileList 指定@ 联系人
-     * @param isAtAll    是否@ 全部联系人
-     * @return OapiRobotSendResponse
-     */
-
-    public OapiRobotSendResponse sendMessageByText(String content, List<String> mobileList, boolean isAtAll) {
-        if (StringUtils.isEmpty(content)) {
-            return null;
-        }
-
-        //参数	参数类型	必须	说明
-        //msgtype	String	是	消息类型，此时固定为：text
-        //content	String	是	消息内容
-        //atMobiles	Array	否	被@人的手机号(在content里添加@人的手机号)
-        //isAtAll	bool	否	@所有人时：true，否则为：false
-        OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();
-        text.setContent(content);
-        OapiRobotSendRequest request = new OapiRobotSendRequest();
-        if (!CollectionUtils.isEmpty(mobileList)) {
-            // 发送消息并@ 以下手机号联系人
-            OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
-            at.setAtMobiles(mobileList);
-            at.setIsAtAll(isAtAll);
-            request.setAt(at);
-        }
-        request.setMsgtype(DingTalkUtil.MSG_TYPE_TEXT);
-        request.setText(text);
-
-        OapiRobotSendResponse response = new OapiRobotSendResponse();
-        try {
-            response = DingTalkUtil.client.execute(request);
-            System.out.println("【DingTalkUtils】发送普通文本消息 响应参数：" + JSON.toJSONString(response));
-        } catch (ApiException e) {
-            logger.error("[发送普通文本消息]: 发送消息失败, 异常捕获{}", e.getMessage());
-        }
-        return response;
-    }
-
-
-    /**
-     * 发送link 类型消息
-     *
-     * @param title      消息标题
-     * @param text       消息内容
-     * @param messageUrl 点击消息后跳转的url
-     * @param picUrl     插入图片的url
-     * @return OapiRobotSendResponse
-     */
-
-    public OapiRobotSendResponse sendMessageByLink(String title, String text, String messageUrl, String picUrl) {
-        if (StringUtils.isEmpty(title) || StringUtils.isEmpty(text) || StringUtils.isEmpty(messageUrl)) {
-            return null;
-        }
-        //参数	参数类型	必须	说明
-        //msgtype	String	是	消息类型，此时固定为：link
-        //title	String	是	消息标题
-        //text	String	是	消息内容。如果太长只会部分展示
-        //messageUrl	String	是	点击消息跳转的URL
-        //picUrl	String	否	图片URL
-        OapiRobotSendRequest.Link link = new OapiRobotSendRequest.Link();
-        link.setTitle(title);
-        link.setText(text);
-        link.setMessageUrl(messageUrl);
-        link.setPicUrl(picUrl);
-
-        OapiRobotSendRequest request = new OapiRobotSendRequest();
-        request.setMsgtype(DingTalkUtil.MSG_TYPE_LINK);
-        request.setLink(link);
-
-        OapiRobotSendResponse response = new OapiRobotSendResponse();
-        try {
-            response = DingTalkUtil.client.execute(request);
-            System.out.println("【DingTalkUtils】发送link 响应参数：" + JSON.toJSONString(response));
-        } catch (ApiException e) {
-            logger.error("[发送link 类型消息]: 发送消息失败, 异常捕获{}", e.getMessage());
-        }
-        return response;
     }
 
 
@@ -273,7 +124,7 @@ public class DingTalkUtil {
         }
         OapiRobotSendResponse response = new OapiRobotSendResponse();
         try {
-            response = DingTalkUtil.client.execute(request);
+            response = client.execute(request);
             System.out.println("【DingTalkUtils】发送link 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
             logger.error("[发送link 类型消息]: 发送消息失败, 异常捕获{}", e.getMessage());
@@ -321,7 +172,7 @@ public class DingTalkUtil {
         request.setActionCard(actionCard);
         OapiRobotSendResponse response = new OapiRobotSendResponse();
         try {
-            response = DingTalkUtil.client.execute(request);
+            response = client.execute(request);
             System.out.println("【DingTalkUtils】整体跳转ActionCard类型的发送消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
             logger.error("[发送ActionCard 类型消息]: 整体跳转ActionCard类型的发送消息失败, 异常捕获{}", e.getMessage());
@@ -367,7 +218,7 @@ public class DingTalkUtil {
         request.setActionCard(actionCard);
         OapiRobotSendResponse response = new OapiRobotSendResponse();
         try {
-            response = DingTalkUtil.client.execute(request);
+            response = client.execute(request);
             System.out.println("【DingTalkUtils】独立跳转ActionCard类型发送消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
             logger.error("[发送ActionCard 类型消息]: 独立跳转ActionCard类型发送消息失败, 异常捕获{}", e.getMessage());
@@ -399,7 +250,7 @@ public class DingTalkUtil {
         request.setFeedCard(feedcard);
         OapiRobotSendResponse response = new OapiRobotSendResponse();
         try {
-            response = DingTalkUtil.client.execute(request);
+            response = client.execute(request);
             System.out.println("【DingTalkUtils】独立跳转ActionCard类型发送消息 响应参数：" + JSON.toJSONString(response));
         } catch (ApiException e) {
             logger.error("[发送ActionCard 类型消息]: 独立跳转ActionCard类型发送消息失败, 异常捕获{}", e.getMessage());

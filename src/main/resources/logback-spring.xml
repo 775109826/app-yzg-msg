@@ -16,7 +16,7 @@
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springboot.sample" level="ERROR"/>
         <logger name="org.springframework.scheduling.quartz" level="ERROR"/>
-        <logger name="com.prosper" level="${log.file.level}"/>
+        <logger name="com.yzg" level="${log.file.level}"/>
     </springProfile>
 
     <!-- 生产环境 -->
@@ -24,7 +24,7 @@
         <logger name="org.springframework.web" level="ERROR"/>
         <logger name="org.springboot.sample" level="ERROR"/>
         <logger name="org.springframework.scheduling.quartz" level="ERROR"/>
-        <logger name="com.prosper" level="${log.file.level}"/>
+        <logger name="com.yzg" level="${log.file.level}"/>
     </springProfile>
 
     <!-- 控制台输出 -->
