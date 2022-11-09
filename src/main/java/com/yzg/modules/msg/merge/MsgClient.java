@@ -132,11 +132,12 @@ public class MsgClient {
             modelMap.put("itemSubhead","发货日报表");
             modelMap.put("thClassName","品名");
             modelMap.put("thSend","当日发货（件）");
-            modelMap.put("thGoodSum","已发数量（件）");
+            modelMap.put("thGoodSum","当月累计已发数量（件）");
             modelMap.put("thGoodSumRatio","发货占比（%）");
             modelMap.put("thDayReport","今日报货（件）");
             modelMap.put("thNoSend","未发数量（件）");
             modelMap.put("thRepertory","仓库库存（件）");
+            modelMap.put("remark","数据范围包含孟州、原阳、封丘");
 
 
             modelMap.put("entityList", dailyDeliveryList);
@@ -180,6 +181,8 @@ public class MsgClient {
             modelMap.put("thIncome","收入（元）");
             modelMap.put("thDisburse","支出（元）");
             modelMap.put("thResidue","余额（元）");
+            modelMap.put("remark","数据范围包含孟州、原阳、封丘");
+
 
             modelMap.put("kcCash", resultMap.get("kcCash"));
             modelMap.put("amountInstance", resultMap.get("amountInstance"));

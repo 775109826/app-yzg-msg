@@ -170,6 +170,10 @@
                 <td>${sumItem.zfAmount!""}</td>
                 <td>${sumItem.yeAmount!""}</td>
             </tr>
+
+            <tr class="total" style="background-color: #fff">
+                <td colspan="4" style="text-align: right">${remark!""}</td>
+            </tr>
         </table>
     </div>
 </div>

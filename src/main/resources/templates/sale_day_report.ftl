@@ -93,9 +93,9 @@
             <td>${sumItem.wf!""}</td>
             <td>${sumItem.kc!""}</td>
         </tr>
-<#--        <tr>-->
-<#--            <td colspan="7" style="text-align: right;padding-right: 10px;">制表人：管理中心-信息部</td>-->
-<#--        </tr>-->
+        <tr class="total" style="background-color: #fff">
+            <td colspan="7" style="text-align: right">${remark!""}</td>
+        </tr>
     </table>
 </div>
 </body>

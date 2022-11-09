@@ -9,7 +9,7 @@
             convert(decimal(8,0),ISNULL(a.fhNB,0)) AS 'drfh',
             convert(decimal(8,0),ISNULL(b.fhNB,0)) AS 'ylfh',
             convert(decimal(8,0),ISNULL(d.bhNB,0)) AS 'drbh',
-            convert(decimal(8,0),ISNULL(e.wfNB,0)) AS 'wf',
+            convert(decimal(8,0),ISNULL(e.wfNB,0)) + convert(decimal(8,0),ISNULL(d.bhNB,0)) AS 'wf',
             convert(decimal(8,0),ISNULL(c.kcNB,0)) AS 'kc'
         FROM
           InventoryClass t
@@ -53,7 +53,7 @@
             FROM
             SA_BatchRef
             WHERE
-            cWhcode = '1001'
+            cWhcode IN ('1001','2037','2029')
             GROUP BY
             substring(cInvCode,1,4)
             HAVING
@@ -75,8 +75,7 @@
             WHERE
             m.dDate = #{dataDate}
             AND m.cSTCode = '11'
-            AND m.cDepCode IN ('1806',
-            '1807')
+            AND m.cDepCode IN ('1806','1807','1809')
             GROUP BY
             substring(d.cInvCode,1,4)
         ) d
@@ -96,7 +95,7 @@
             WHERE
             m.dDate = #{dataDate}
             AND m.cSTCode = '11'
-            AND m.cDepCode IN ('1806', '1807')
+            AND m.cDepCode IN ('1806', '1807','1809')
             AND ISNULL(m.iStatus,'0') &lt;&gt;  '1'
             GROUP BY
             substring(d.cInvCode,1,4)
