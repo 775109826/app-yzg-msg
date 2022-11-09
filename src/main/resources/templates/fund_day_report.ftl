@@ -107,9 +107,9 @@
                          src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
                          width="200" height="80"/></th>
                 <th style="text-align: center;font-size:32px;color: black">
-                    <b style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">杨掌柜食品科技（河南）有限公司</b>
+                    <b style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">${itemTitle}</b>
                     <br/>
-                    <b style="text-align: center;width: 100%;font-size: 32px;font-weight: bold;">资金日报表</b>
+                    <b style="text-align: center;width: 100%;font-size: 32px;font-weight: bold;">${itemSubhead}</b>
                 </th>
                 <th style="width: 20%;font-size: 28px;text-align: right;"><div style="padding-top: 50px">${dataDate}</div></th>
             </tr>
@@ -119,7 +119,7 @@
     <#--   概况 -->
     <div class="panel">
         <div>
-            <div class="text-sm text-bold" style="padding-top: 5px">可用现金</div>
+            <div class="text-sm text-bold" style="padding-top: 5px">${cash}</div>
             <div class="padding-xs" style="font-size: 38px;color: red">${kcCash.amount!""}</div>
         </div>
         <#--    详情-->
@@ -128,19 +128,19 @@
                 <tr style="border-color: #ffffff;">
                     <th style="width: 33%;text-align: left">
                         <div class="padding-sm" style="text-align: center">
-                            <div class="text-sm">收入</div>
+                            <div class="text-sm">${income}</div>
                             <div class="padding-xs text-sm">${amountInstance.srAmount!""}</div>
                         </div>
                     </th>
                     <th style="width: 33%;text-align: center;">
                         <div class="padding-sm" style="text-align: center">
-                            <div class="text-sm">支出</div>
+                            <div class="text-sm">${disburse}</div>
                             <div class="padding-xs text-sm">${amountInstance.zfAmount!""}</div>
                         </div>
                     </th>
                     <th style="width: 33%;text-align: right;">
                         <div class="padding-sm" style="text-align: center">
-                            <div class="text-sm">余额</div>
+                            <div class="text-sm">${residue}</div>
                             <div class="padding-xs text-sm">${amountInstance.yeAmount!""}</div>
                         </div>
                     </th>
@@ -151,10 +151,10 @@
     <div style="">
         <table cellspacing="0" cellpadding="0" width='100%' class="my-table">
             <tr class="tableTitle">
-                <th>名称</th>
-                <th>收入（元）</th>
-                <th>支出（元）</th>
-                <th>余额（元）</th>
+                <th>${thName}</th>
+                <th>${thIncome}</th>
+                <th>${thDisburse}</th>
+                <th>${thResidue}</th>
             </tr>
             <#list amountList as item>
                 <tr>

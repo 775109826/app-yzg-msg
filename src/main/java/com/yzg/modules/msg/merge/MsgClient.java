@@ -128,6 +128,17 @@ public class MsgClient {
             // 参数填充
             Map<String, Object> resultMap = msgService.queryDailyDeliveryReport(currentDate);
             List<DailyDelivery> dailyDeliveryList = (List<DailyDelivery>) resultMap.get("dataList");
+            modelMap.put("itemTitle","杨掌柜食品科技（河南）有限公司");
+            modelMap.put("itemSubhead","发货日报表");
+            modelMap.put("thClassName","品名");
+            modelMap.put("thSend","当日发货（件）");
+            modelMap.put("thGoodSum","已发数量（件）");
+            modelMap.put("thGoodSumRatio","发货占比（%）");
+            modelMap.put("thDayReport","今日报货（件）");
+            modelMap.put("thNoSend","未发数量（件）");
+            modelMap.put("thRepertory","仓库库存（件）");
+
+
             modelMap.put("entityList", dailyDeliveryList);
             modelMap.put("sumItem", resultMap.get("dataItem"));
             modelMap.put("dataDate", DateUtil.format(DateUtil.date(), "yyyy年MM月dd日"));
@@ -142,7 +153,7 @@ public class MsgClient {
     }
 
     /**
-     * 消息拼接-发货日报
+     * 消息拼接-资金日报
      *
      * @return
      */
@@ -158,6 +169,18 @@ public class MsgClient {
         try {
             // 参数填充
             Map<String, Object> resultMap = msgService.queryFundDailyReport(currentDate);
+
+            modelMap.put("itemTitle","杨掌柜食品科技（河南）有限公司");
+            modelMap.put("itemSubhead","资金日报表");
+            modelMap.put("cash","可用现金");
+            modelMap.put("income","收入");
+            modelMap.put("disburse","支出");
+            modelMap.put("residue","余额");
+            modelMap.put("thName","名称");
+            modelMap.put("thIncome","收入（元）");
+            modelMap.put("thDisburse","支出（元）");
+            modelMap.put("thResidue","余额（元）");
+
             modelMap.put("kcCash", resultMap.get("kcCash"));
             modelMap.put("amountInstance", resultMap.get("amountInstance"));
             List<FundDaily> fundDailyList = (List<FundDaily>) resultMap.get("amountList");

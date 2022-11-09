@@ -52,9 +52,9 @@
                          src="http://www.yangzhanggui.net/upload/gallery/thumbnail/A3A2354A-C672-8587-BFAFF5A94188-tbl.png"
                          width="200" height="80"/></th>
                 <th style="text-align: center;font-size:32px;color: black">
-                    <b style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">杨掌柜食品科技（河南）有限公司</b>
+                    <b style="text-align: center;width: 100%;font-size: 38px;font-weight: bold;">${itemTitle}</b>
                     <br/>
-                    <b style="text-align: center;width: 100%;font-size: 32px;font-weight: bold;">发货日报表</b>
+                    <b style="text-align: center;width: 100%;font-size: 32px;font-weight: bold;">${itemSubhead}</b>
                 </th>
                 <th style="width: 20%;font-size: 28px;text-align: right;"><div style="padding-top: 50px">${dataDate}</div></th>
             </tr>
@@ -62,14 +62,14 @@
     </div>
     <table cellspacing="0" cellpadding="0" width='100%' class="my-table">
         <tr class="title">
-            <th>品名</th>
+            <th>${thClassName}</th>
             <#--<th>规格</th>-->
-            <th>当日发货（件）</th>
-            <th>已发数量（件）</th>
-            <th>发货占比（%）</th>
-            <th>今日报货（件）</th>
-            <th>未发数量（件）</th>
-            <th>仓库库存（件）</th>
+            <th>${thSend}</th>
+            <th>${thGoodSum}</th>
+            <th>${thGoodSumRatio}</th>
+            <th>${thDayReport}</th>
+            <th>${thNoSend}</th>
+            <th>${thRepertory}</th>
         </tr>
         <#list entityList as item>
             <tr>
