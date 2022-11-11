@@ -93,10 +93,12 @@
             ON
               d.cSOCode = m.cSOCode
             WHERE
-            m.dDate = #{dataDate}
+            1=1
             AND m.cSTCode = '11'
             AND m.cDepCode IN ('1806', '1807','1809')
             AND ISNULL(m.iStatus,'0') &lt;&gt;  '1'
+            and m.cCloser is null
+            and m.dclosesystime is null
             GROUP BY
             substring(d.cInvCode,1,4)
         ) e
